@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .fact-display {
+            margin: 20px 0;
+            font-size: 1.5em;
+            transition: opacity 0.5s ease;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fun Facts</h1>
+        <div id="factDisplay" class="fact-display"></div>
+        <button id="randomFactBtn" class="btn">Show Random Fact</button>
+        <button id="shareBtn" class="btn">Share on Twitter</button>
+    </div>
+    <script>
+        const facts = [
+            "Honey never spoils.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "Bananas are berries, but strawberries aren't.",
+            "Octopuses have three hearts."
+        ];
+
+        document.getElementById('randomFactBtn').addEventListener('click', () => {
+            const factDisplay = document.getElementById('factDisplay');
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            
+            factDisplay.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                factDisplay.textContent = randomFact;
+                factDisplay.style.opacity = 1; // Fade in
+            }, 500);
+        });
+
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            const fact = document.getElementById('factDisplay').textContent;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(fact)}`;
+            window.open(twitterUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
